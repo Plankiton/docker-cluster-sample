@@ -1,0 +1,19 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  api:
+    build: ./hello-go/
+    ports:
+      - "8000:8000"
+    networks:
+      - server
+  front:
+    build: ./hello-react/
+    ports:
+      - "3000:3000"
+    networks:
+      - server
+    depends_on:
+      - api
+networks:
+  server:
+    driver: bridge
